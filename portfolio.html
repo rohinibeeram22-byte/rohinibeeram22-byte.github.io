@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rohini Reddy — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0f0e0b;
+    --cream: #f5f0e8;
+    --warm: #e8dfc8;
+    --gold: #c8a84b;
+    --rust: #b85c38;
+    --sage: #4a6741;
+    --mist: #8fa0a8;
+    --soft: #f9f6f0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    backdrop-filter: blur(12px);
+    background: rgba(245,240,232,0.85);
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+  }
+  nav .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+  nav ul a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  nav ul a:hover { opacity: 1; color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 4rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+    max-width: 380px;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--ink); }
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.5;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 0.3s;
+  }
+  .btn-secondary:hover { opacity: 1; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #d4a96a 0%, #8b6914 40%, #3d2b0a 100%);
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(245,240,232,0.15) 0%, transparent 60%);
+  }
+
+  .hero-visual {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .data-orb {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,240,232,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: spin 20s linear infinite;
+  }
+  .data-orb::before {
+    content: '';
+    position: absolute;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 1px dashed rgba(245,240,232,0.15);
+    animation: spin 15s linear infinite reverse;
+  }
+  .data-orb::after {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,240,232,0.1);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .orb-center {
+    width: 140px; height: 140px;
+    background: rgba(245,240,232,0.08);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: spin 20s linear infinite reverse;
+    border: 1px solid rgba(245,240,232,0.2);
+    backdrop-filter: blur(4px);
+  }
+  .orb-center .big-num {
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .orb-center .small-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.6);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .dot-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .dot {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--cream);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  .hero-bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* SCROLLING TICKER */
+  .ticker {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 30s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 2.5rem;
+    opacity: 0.7;
+  }
+  .ticker-item span { color: var(--gold); margin: 0 0.5rem; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+
+  /* SECTIONS */
+  section {
+    padding: 7rem 5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.3;
+    max-width: 80px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .about-headline {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .about-headline em { font-style: italic; color: var(--gold); }
+  .about-body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 2;
+    color: rgba(15,14,11,0.75);
+    margin-bottom: 2rem;
+  }
+
+  /* SKILLS */
+  .skills-section { background: var(--ink); color: var(--cream); max-width: none; }
+  .skills-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 7rem 5rem;
+  }
+  .skills-section .section-label { color: var(--gold); }
+  .skills-section .section-label::after { background: rgba(245,240,232,0.3); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(245,240,232,0.1);
+    margin-top: 1rem;
+  }
+  .skill-card {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { background: rgba(200,168,75,0.06); }
+
+  .skill-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .skill-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .skill-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.6;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(15,14,11,0.1);
+    position: relative;
+    transition: padding-left 0.3s;
+  }
+  .exp-item:hover { padding-left: 1rem; }
+  .exp-item:first-child { border-top: 1px solid rgba(15,14,11,0.1); }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--mist);
+    padding-top: 0.3rem;
+    text-transform: uppercase;
+  }
+  .exp-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.4rem;
+  }
+  .exp-role {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+  }
+  .exp-detail {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(15,14,11,0.65);
+    line-height: 1.75;
+  }
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .exp-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.25rem 0.7rem;
+  }
+
+  /* PROJECTS */
+  .projects-section { background: var(--soft); max-width: none; }
+  .projects-inner { max-width: 1300px; margin: 0 auto; padding: 7rem 5rem; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .project-card {
+    background: var(--cream);
+    border: 1px solid rgba(200,168,75,0.2);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .project-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at top right, rgba(200,168,75,0.12), transparent 70%);
+  }
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+  .project-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .project-desc {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: rgba(15,14,11,0.6);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .project-tools {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .project-tool {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(200,168,75,0.1);
+    color: var(--gold);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  /* FEATURED PROJECT - LARGE */
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: center;
+    background: var(--ink);
+    color: var(--cream);
+    border-color: transparent;
+  }
+  .project-card.featured .project-num { color: var(--gold); opacity: 0.6; }
+  .project-card.featured .project-title { font-size: 2rem; }
+  .project-card.featured .project-desc { color: rgba(245,240,232,0.55); }
+  .project-card.featured .project-tool {
+    background: rgba(200,168,75,0.15);
+    color: var(--gold);
+  }
+  .project-visual {
+    height: 220px;
+    background: rgba(200,168,75,0.08);
+    border: 1px solid rgba(200,168,75,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 140px;
+    padding: 0 1rem;
+  }
+  .bar {
+    width: 22px;
+    background: linear-gradient(to top, rgba(200,168,75,0.4), rgba(200,168,75,0.9));
+    border-radius: 2px 2px 0 0;
+    animation: barGrow 1.5s ease forwards;
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+  @keyframes barGrow { to { transform: scaleY(1); } }
+  .bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
+  .bar:nth-child(2) { height: 80%; animation-delay: 0.2s; }
+  .bar:nth-child(3) { height: 45%; animation-delay: 0.3s; }
+  .bar:nth-child(4) { height: 95%; animation-delay: 0.4s; }
+  .bar:nth-child(5) { height: 70%; animation-delay: 0.5s; }
+  .bar:nth-child(6) { height: 55%; animation-delay: 0.6s; }
+  .bar:nth-child(7) { height: 88%; animation-delay: 0.7s; }
+
+  /* BLOG / WRITING */
+  .writing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .writing-card {
+    padding: 2rem;
+    border-top: 2px solid var(--gold);
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .writing-card:hover { background: rgba(200,168,75,0.05); }
+  .writing-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--mist);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .writing-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+    line-height: 1.4;
+  }
+  .writing-desc {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: rgba(15,14,11,0.55);
+    line-height: 1.7;
+  }
+  .writing-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink);
+    color: var(--cream);
+    max-width: none;
+    text-align: center;
+  }
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 8rem 3rem;
+  }
+  .contact-headline {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-headline em { font-style: italic; color: var(--gold); }
+  .contact-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+  .contact-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(245,240,232,0.2);
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .contact-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(245,240,232,0.08);
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(15,14,11,0.1);
+    margin: 5rem 0 0;
+  }
+  .stat-box {
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(15,14,11,0.45);
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-template-columns: 1fr; }
+    .writing-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    section, .skills-inner, .projects-inner { padding: 5rem 2rem; }
+    nav { padding: 1rem 1.5rem; }
+    nav ul { gap: 1.2rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Rohini Reddy</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0; max-width:none;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Data Analyst Intern · Tech Story Teller · Hyderabad, India</div>
+    <h1 class="hero-name">Beeram<br><em>Rohini</em><br>Reddy</h1>
+    <p class="hero-tagline">Transforming raw data into meaningful business insights through analytics, visualization, and the art of storytelling.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="data-orb">
+        <div class="orb-center">
+          <span class="big-num">∞</span>
+          <span class="small-label">insights</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom-bar"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Python <span>✦</span></span>
+    <span class="ticker-item">SQL <span>✦</span></span>
+    <span class="ticker-item">Power BI <span>✦</span></span>
+    <span class="ticker-item">Tableau <span>✦</span></span>
+    <span class="ticker-item">Machine Learning <span>✦</span></span>
+    <span class="ticker-item">R Programming <span>✦</span></span>
+    <span class="ticker-item">Data Visualization <span>✦</span></span>
+    <span class="ticker-item">Predictive Analytics <span>✦</span></span>
+    <span class="ticker-item">Tech Storytelling <span>✦</span></span>
+    <span class="ticker-item">Excel <span>✦</span></span>
+    <!-- repeat -->
+    <span class="ticker-item">Python <span>✦</span></span>
+    <span class="ticker-item">SQL <span>✦</span></span>
+    <span class="ticker-item">Power BI <span>✦</span></span>
+    <span class="ticker-item">Tableau <span>✦</span></span>
+    <span class="ticker-item">Machine Learning <span>✦</span></span>
+    <span class="ticker-item">R Programming <span>✦</span></span>
+    <span class="ticker-item">Data Visualization <span>✦</span></span>
+    <span class="ticker-item">Predictive Analytics <span>✦</span></span>
+    <span class="ticker-item">Tech Storytelling <span>✦</span></span>
+    <span class="ticker-item">Excel <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-headline">Where data meets <em>narrative</em></h2>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Tech Skills</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Languages</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Curiosity</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="about-body">I'm an aspiring Data Analyst Intern currently pursuing a B.Tech in CSE (Data Science) at Bharat Institute of Engineering and Technology, Hyderabad (CGPA: 7.5). I blend technical rigor with the human art of storytelling — because the best insight means nothing if it can't be communicated.</p>
+      <p class="about-body">With hands-on experience in dashboard development, predictive analytics, and AI-powered analysis, I'm on a mission to bridge the gap between complex data and clear, actionable decisions. When I'm not crunching numbers, I'm writing tech stories on Hashnode and publishing insights on my LinkedIn Newsletter.</p>
+      <p class="about-body">I'm fluent in Telugu and Hindi, professionally proficient in English, and carry a working knowledge of Tamil — communication, in every form, is at the heart of what I do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="skills-section" id="skills">
+  <div class="skills-inner">
+    <div class="section-label">Toolkit</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Data wrangling, automation, and machine learning pipelines with pandas, numpy, scikit-learn.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">SQL</div>
+        <div class="skill-desc">Complex queries, joins, and database management for structured data extraction and analysis.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Power BI</div>
+        <div class="skill-desc">Interactive dashboards and business intelligence reports with DAX formulas and data modeling.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <div class="skill-name">Tableau</div>
+        <div class="skill-desc">Compelling visual narratives and data stories with beautiful, intuitive dashboards.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📐</div>
+        <div class="skill-name">R Programming</div>
+        <div class="skill-desc">Statistical analysis, regression modeling, and advanced data visualization with ggplot2.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">Machine Learning</div>
+        <div class="skill-desc">Predictive modeling, regression, classification, and AI-powered analytical techniques.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-date">May 2026 — Present</div>
+      <div>
+        <div class="exp-company">Hashnode</div>
+        <div class="exp-role">Tech Story Teller</div>
+        <div class="exp-detail">Crafting compelling narratives around data, technology, and Python for the developer community. Writing accessible, insight-driven articles that bridge technical depth with readable storytelling. Published article: <em>Tale of Python</em> — an exploration of Python's role in modern data analysis.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Technical Writing</span>
+          <span class="exp-tag">Data Communication</span>
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Content Strategy</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="https://my-tec.hashnode.dev/tale-of-python" target="_blank" style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--rust);text-decoration:none;border-bottom:1px solid currentColor;">Read: Tale of Python →</a>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Aug 2025</div>
+      <div>
+        <div class="exp-company">TCS Forage</div>
+        <div class="exp-role">Data Analytics Virtual Intern</div>
+        <div class="exp-detail">Worked on AI-powered data analysis and dashboard visualization projects using Power BI. Generated analytical insights and reports using regression models and visualization techniques, delivering actionable business intelligence from complex datasets.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Power BI</span>
+          <span class="exp-tag">AI Analysis</span>
+          <span class="exp-tag">Regression Models</span>
+          <span class="exp-tag">Dashboards</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Aug 2023 — Present</div>
+      <div>
+        <div class="exp-company">Bharat Institute of Engineering & Technology</div>
+        <div class="exp-role">B.Tech — CSE (Data Science) · CGPA 7.5</div>
+        <div class="exp-detail">Pursuing a Bachelor of Technology in Computer Science with a specialisation in Data Science. Coordinator for the Power BI Workshop at BIET. Participant in Smart India Hackathon 2025. Active NSS Volunteer. Certified in AI/ML (BIET) and Python for Data Science (Simplilearn).</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Data Science</span>
+          <span class="exp-tag">JNTUH</span>
+          <span class="exp-tag">Machine Learning</span>
+          <span class="exp-tag">Smart India Hackathon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="projects-section" id="projects">
+  <div class="projects-inner">
+    <div class="section-label">Projects</div>
+    <div class="projects-grid">
+      <!-- FEATURED -->
+      <div class="project-card featured">
+        <div>
+          <div class="project-num">01 — Featured</div>
+          <h3 class="project-title">Crime Data Intelligence Platform</h3>
+          <p class="project-desc">Built an interactive Power BI dashboard to analyze crime trends, KPIs, and geographical insights. Created visual reports and storytelling dashboards to support analytical decision-making — turning raw crime data into patterns that inform strategy.</p>
+          <div class="project-tools">
+            <span class="project-tool">Power BI</span>
+            <span class="project-tool">Microsoft Excel</span>
+            <span class="project-tool">KPI Analysis</span>
+            <span class="project-tool">Data Storytelling</span>
+          </div>
+          <div style="margin-top:1.2rem;">
+            <a href="https://github.com/rohinibeeram22-byte/crime-data-intelligence/issues/1" target="_blank" style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid currentColor;opacity:0.8;">View on GitHub →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="chart-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">02 · Mar 2025</div>
+        <h3 class="project-title">Soil Fertility Prediction</h3>
+        <p class="project-desc">Developed a machine learning-based soil fertility prediction system using Python and Random Forest Regression. Performed preprocessing, feature engineering, and prediction analysis on agricultural datasets to support data-driven farming decisions.</p>
+        <div class="project-tools">
+          <span class="project-tool">Python</span>
+          <span class="project-tool">Pandas</span>
+          <span class="project-tool">NumPy</span>
+          <span class="project-tool">TensorFlow</span>
+          <span class="project-tool">Random Forest</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">03 · May 2026</div>
+        <h3 class="project-title">Indian Startup Funding Analysis</h3>
+        <p class="project-desc">Developed Tableau dashboards to analyze startup funding trends and investment insights across India. Performed analytical reporting and data visualization to surface patterns in funding rounds, sectors, and investor activity.</p>
+        <div class="project-tools">
+          <span class="project-tool">Tableau</span>
+          <span class="project-tool">Microsoft Excel</span>
+          <span class="project-tool">Analytical Reporting</span>
+        </div>
+        <div style="margin-top:1.2rem;">
+          <a href="https://github.com/rohinibeeram22-byte/Indian-Startup-Funding-using-Tableau-/issues/" target="_blank" style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid currentColor;opacity:0.8;">View on GitHub →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WRITING -->
+<section id="writing">
+  <div class="section-label">Writing & Publishing</div>
+  <div class="writing-grid">
+    <div class="writing-card">
+      <div class="writing-date">May 2026 · Hashnode</div>
+      <h3 class="writing-title">Tale of Python</h3>
+      <p class="writing-desc">An exploration of Python's journey from a scripting language to the backbone of modern data science — covering its elegance, power, and why every analyst should know it.</p>
+      <a href="https://my-tec.hashnode.dev/tale-of-python" class="writing-link" target="_blank">Read on Hashnode →</a>
+    </div>
+    <div class="writing-card">
+      <div class="writing-date">LinkedIn Newsletter</div>
+      <h3 class="writing-title">Data & Tech Insights</h3>
+      <p class="writing-desc">A LinkedIn newsletter covering trends in data analytics, machine learning, and the tools shaping the future of business intelligence. Subscribe for regular insights and practical tips.</p>
+      <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7466356804760006656" class="writing-link" target="_blank">Subscribe on LinkedIn →</a>
+    </div>
+    <div class="writing-card">
+      <div class="writing-date">Coming Soon · Hashnode</div>
+      <h3 class="writing-title">More Stories in Progress</h3>
+      <p class="writing-desc">New articles on Power BI, Tableau, and the art of data storytelling are on the way. Follow the blog to stay updated on fresh perspectives from a practising analyst.</p>
+      <a href="https://my-tec.hashnode.dev" class="writing-link" target="_blank">Follow on Hashnode →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center; color:var(--gold);">Let's Connect</div>
+    <h2 class="contact-headline">Have data to <em>make sense of?</em></h2>
+    <p class="contact-sub">I'm open to internships, collaborative projects, and conversations about data, analytics, and the stories they tell.</p>
+    <div class="contact-links">
+      <a href="mailto:rohinibeeram22@gmail.com" class="contact-link">rohinibeeram22@gmail.com</a>
+      <a href="https://www.linkedin.com/in/beeram-rohini-reddy" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7466356804760006656" class="contact-link" target="_blank">Newsletter</a>
+      <a href="https://my-tec.hashnode.dev" class="contact-link" target="_blank">Hashnode Blog</a>
+      <a href="https://github.com/rohinibeeram22" class="contact-link" target="_blank">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Beeram Rohini Reddy — All rights reserved</p>
+  <p>Data Analyst · Tech Story Teller · Hyderabad, India</p>
+</footer>
+
+</body>
+</html>
